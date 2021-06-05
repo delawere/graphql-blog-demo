@@ -18,9 +18,8 @@ jobs:
         run: npm install
       - name: Prettify our source code with Prettier
         run: npm run check-format
-      - name: Deploy formatted change to another branch
+      - uses: peterjgrainger/action-create-branch@v2.0.1s
         if: ${{ failure() }}
-        uses: peterjgrainger/action-create-branch@v2.0.1s
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
