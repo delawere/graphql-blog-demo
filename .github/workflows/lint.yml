@@ -11,14 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install nvm
-        run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-      - name: Install node.js
-        env:
-          NODE_VERSION: 14.17.0
-        run: nvm install $NODE_VERSION
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.17.0'
       - name: Install dependencies
         run: npm install
+      - name: Install Prettier
+        run: npm install prettier --save-dev
       - name: Prettify our source code with Prettier
         run: npm run prettier
         if: ${{ failure() }}
