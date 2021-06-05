@@ -28,8 +28,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: 'formatted'
-      - run: git checkout formatted
-      - run: npm run prettier --write
-      - run: git add .
-      - run: git commit -m "format"
-      - run: git push origin formatted
+      # - run: git checkout formatted
+      # - run: npm run prettier --write
+      # - run: git add .
+      # - run: git commit -m "format"
+      # - run: git push origin formatted
