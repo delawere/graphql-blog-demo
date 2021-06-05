@@ -23,7 +23,7 @@ jobs:
         run: npm run prettier
       - if: ${{ failure() }}
       - name: Create new branch with formatted code
-      - uses: peterjgrainger/action-create-branch@v2.0.1
+        uses: peterjgrainger/action-create-branch@v2.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
