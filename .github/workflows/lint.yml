@@ -16,13 +16,11 @@ jobs:
           node-version: '14.17.0'
       - name: Install dependencies
         run: npm install
-      - name: Install Prettier
-        run: npm install prettier --save-dev
       - name: Prettify our source code with Prettier
-        run: npm run prettier
+        run: npm run check-format
       - name: Deploy formatted change to another branch
         if: ${{ failure() }}
-        uses: peterjgrainger/action-create-branch@v2.0.1
+        uses: peterjgrainger/action-create-branch@v2.0.1s
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
