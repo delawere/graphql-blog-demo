@@ -1,0 +1,35 @@
+name: eslint
+
+on: 
+  push: 
+    branches: [master]
+  pull_request: 
+    branches: '*'
+  
+jobs: 
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install nvm
+        run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+      - name: Install node.js
+        env:
+          NODE_VERSION: 14.17.0
+        run: nvm install $NODE_VERSION
+      - name: Install dependencies
+        run: npm install
+      - name: Prettify our source code with Prettier
+        run: npm run prettier
+      - if: ${{ failure() }}
+      - name: Create new branch with formatted code
+        uses: peterjgrainger/action-create-branch@v2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: 'formatted'
+      - run: git checkout formatted
+      - run: npm run prettier --write
+      - run: git add .
+      - run: git commit -m "format"
+      - run: git push origin formatted
