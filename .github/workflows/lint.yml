@@ -21,9 +21,9 @@ jobs:
         run: npm install
       - name: Prettify our source code with Prettier
         run: npm run prettier
-      - if: ${{ failure() }}
+        if: ${{ failure() }}
+      - uses: peterjgrainger/action-create-branch@v2.0.1
       - name: Create new branch with formatted code
-        uses: peterjgrainger/action-create-branch@v2.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
