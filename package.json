@@ -9,8 +9,8 @@
     "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only -P nexus.tsconfig.json pages/api",
-    "check-format": "prettier \"**/*.+(ts|tsx|jsx|js|json|css)\" --list-different",
-    "format": "prettier \"**/*.+(ts|tsx|jsx|js|json|css)\" --write",
+    "check-format": "prettier --single-quote \"**/*.+(ts|tsx|jsx|js|json|css)\" --list-different",
+    "format": "prettier --single-quote \"**/*.+(ts|tsx|jsx|js|json|css)\" --write",
     "check-types": "tsc"
   },
   "keywords": [],
