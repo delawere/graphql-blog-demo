@@ -1,13 +1,13 @@
-import React from 'react';
-import Head from 'next/head';
-import { ApolloProvider } from '@apollo/react-hooks';
+import React from "react";
+import Head from "next/head";
+import { ApolloProvider } from "@apollo/react-hooks";
 // Apollo v3
 // import { ApolloClient, InMemoryCache } from '@apollo/client';
 // import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 // Apollo v2
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient } from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
 
 let apolloClient = null;
 
@@ -30,12 +30,12 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
   };
 
   // Set the correct displayName in development
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     const displayName =
-      PageComponent.displayName || PageComponent.name || 'Component';
+      PageComponent.displayName || PageComponent.name || "Component";
 
-    if (displayName === 'App') {
-      console.warn('This withApollo HOC only works with PageComponents.');
+    if (displayName === "App") {
+      console.warn("This withApollo HOC only works with PageComponents.");
     }
 
     WithApollo.displayName = `withApollo(${displayName})`;
@@ -56,7 +56,7 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
       }
 
       // Only on the server:
-      if (typeof window === 'undefined') {
+      if (typeof window === "undefined") {
         // When redirecting, the response is finished.
         // No point in continuing to render
         if (ctx.res && ctx.res.finished) {
@@ -67,7 +67,7 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
         if (ssr) {
           try {
             // Run all GraphQL queries
-            const { getDataFromTree } = await import('@apollo/react-ssr');
+            const { getDataFromTree } = await import("@apollo/react-ssr");
             await getDataFromTree(
               <AppTree
                 pageProps={{
@@ -80,7 +80,7 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
             // Prevent Apollo Client GraphQL errors from crashing SSR.
             // Handle them in components via the data.error prop:
             // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
-            console.error('Error while running `getDataFromTree`', error);
+            console.error("Error while running `getDataFromTree`", error);
           }
 
           // getDataFromTree does not call componentWillUnmount
@@ -109,7 +109,7 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
 function initApolloClient(initialState) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return createApolloClient(initialState);
   }
 
@@ -126,7 +126,7 @@ function initApolloClient(initialState) {
  * @param  {Object} [initialState={}]
  */
 function createApolloClient(initialState = {}) {
-  const ssrMode = typeof window === 'undefined';
+  const ssrMode = typeof window === "undefined";
   const cache = new InMemoryCache({
     // Apollo v3
     // typePolicies: {
@@ -146,7 +146,7 @@ function createApolloClient(initialState = {}) {
     cacheRedirects: {
       Query: {
         post: (_, args, { getCacheKey }) => {
-          return getCacheKey({ __typename: 'Post', id: args.postId });
+          return getCacheKey({ __typename: "Post", id: args.postId });
         },
       },
     },
@@ -160,9 +160,9 @@ function createApolloClient(initialState = {}) {
 }
 
 function createIsomorphLink() {
-  const { HttpLink } = require('apollo-link-http');
+  const { HttpLink } = require("apollo-link-http");
   return new HttpLink({
-    uri: `${process.env.PUBLIC_HOST ?? 'http://localhost:3000'}/api`,
-    credentials: 'same-origin',
+    uri: `${process.env.PUBLIC_HOST ?? "http://localhost:3000"}/api`,
+    credentials: "same-origin",
   });
 }
