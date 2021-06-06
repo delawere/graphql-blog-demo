@@ -31,6 +31,7 @@ jobs:
       - name: Format code and then push to new branch
         if: ${{ failure() }}
         run: |
+          npm install
           npm run format
           git add .
           git commit -m "format"
