@@ -31,7 +31,6 @@ jobs:
       - name: Format code and then push to new branch
         if: ${{ failure() }}
         run: |
-          git checkout formatted
           npm run prettier --write
           git add .
           git commit -m "format"
