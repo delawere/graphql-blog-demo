@@ -29,8 +29,8 @@ jobs:
         with:
           ref: 'formatted1'
       - name: Format code and then push to new branch
+        if: ${{ failure() }}
         run: |
-          ${{ failure() }}
           git checkout formatted
           npm run prettier --write
           git add .
