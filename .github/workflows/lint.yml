@@ -28,12 +28,13 @@ jobs:
         if: ${{ failure() }}
         with:
           ref: 'formatted1'
-      - name: Format code and then push to new branch
-        if: ${{ failure() }}
       - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+        if: ${{ failure() }}
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
-      - run: |
+      - name: Push changes
+        if: ${{ failure() }}
+        run: |
           npm install
           npm run format
           git add .
