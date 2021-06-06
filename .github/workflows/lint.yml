@@ -25,10 +25,14 @@ jobs:
         with:
           branch: 'formatted1'
       - uses: actions/checkout@v2
+        if: ${{ failure() }}
         with:
           ref: 'formatted1'
-      - run: git checkout formatted
-      - run: npm run prettier --write
-      - run: git add .
-      - run: git commit -m "format"
-      - run: git push origin formatted
+      - name: Format code and then push to new branch
+        run: |
+          ${{ failure() }}
+          git checkout formatted
+          npm run prettier --write
+          git add .
+          git commit -m "format"
+          git push origin formatted
