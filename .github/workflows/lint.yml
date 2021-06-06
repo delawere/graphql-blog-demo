@@ -40,3 +40,12 @@ jobs:
           git add .
           git commit -m "format"
           git push -u origin formatted1
+      - name: Type checking in formatted branch
+        if: ${{ failure() }}
+        run: npm run check-types
+      - name: Type checking in master branch
+        uses: actions/checkout@v2
+        if: ${{ success() }}
+        with:
+          ref: 'master'
+        run: npm run check-types
