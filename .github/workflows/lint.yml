@@ -48,4 +48,4 @@ jobs:
         if: ${{ success() }}
         with:
           ref: 'master'
-        run: npm run check-types
+      - run: npm run check-types
