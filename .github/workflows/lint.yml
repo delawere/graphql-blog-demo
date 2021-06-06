@@ -23,11 +23,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: 'formatted1'
+          branch: ${{ github.run_id }}
       - uses: actions/checkout@v2
         if: ${{ failure() }}
         with:
-          ref: 'formatted1'
+          ref: ${{ github.run_id }}
       - uses: oleksiyrudenko/gha-git-credentials@v2-latest
         if: ${{ failure() }}
         with:
@@ -39,7 +39,7 @@ jobs:
           npm run format
           git add .
           git commit -m "format"
-          git push -u origin formatted1
+          git push -u origin ${{ github.run_id }}
       - name: Type checking in formatted branch
         if: ${{ failure() }}
         run: npm run check-types
@@ -47,5 +47,5 @@ jobs:
         uses: actions/checkout@v2
         if: ${{ success() }}
         with:
-          ref: 'master'
+          ref: master
       - run: npm run check-types
