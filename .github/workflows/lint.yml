@@ -39,4 +39,4 @@ jobs:
           npm run format
           git add .
           git commit -m "format"
-          git push -u origin formatted
+          git push -u origin formatted1
