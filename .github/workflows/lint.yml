@@ -37,6 +37,7 @@ jobs:
         run: |
           npm install
           npm run format
+          npm run check-format
           git add .
           git commit -m "format"
           git push -u origin ${{ github.run_id }}
