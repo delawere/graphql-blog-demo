@@ -21,7 +21,7 @@ jobs:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
       - name: Copy files to the server
         run: |
-          npm ci --ignore-scripts
+          npm ci
           npm run build
           rsync -a --progress --human-readable --delete \
           --exclude-from '.gitignore' \
