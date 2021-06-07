@@ -18,7 +18,7 @@ jobs:
           echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_KNOWN_HOSTS: 34.118.70.136 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGu3hKnHxvfBENEfhsiGnArSokmIZ4sK0wzhqkmNUxClaiIV5WDkg4p1DhRhYehCfjPugKjRvih+zTBZO0AbUAA=
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
       - name: Copy files to the server
         run: |
           rsync -a --progress --human-readable --delete \
