@@ -21,10 +21,17 @@ jobs:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
       - name: Copy files to the server
         run: |
-          npm install
+          npm ci --ignore-scripts
           npm run build
           rsync -a --progress --human-readable --delete \
-          .next deploy@34.118.70.136:~/homework/
+          --exclude-from '.gitignore' \
+          --exclude .gitignore \
+          --exclude .git \
+          --exclude .next \
+          . deploy@34.118.70.136:~/homework/
+      - name: Run app
+        run: |
+          ssh deploy@34.118.70.136 "cd ~/homework && npm install --production && pm2 start npm run --name "homework" -- start" 
       # - name: Restart the application with pm2
       #   run: |
       #     ssh deploy@34.118.70.136 "pushd ~/homework && npm install && popd && pm2 restart ecosystem.config.js"
