@@ -31,4 +31,4 @@ jobs:
           . deploy@34.118.70.136:~/homework/
       - name: Run app
         run: |
-          ssh deploy@34.118.70.136 "cd ~/homework && npm install --production && cd && pm2 restart ecosystem.config.js" 
+          ssh deploy@34.118.70.136 "cd ~/homework && export NEXT_PUBLIC_HOST=true && npm install --production && cd && pm2 restart ecosystem.config.js" 
