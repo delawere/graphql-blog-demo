@@ -162,7 +162,7 @@ function createApolloClient(initialState = {}) {
 function createIsomorphLink() {
   const { HttpLink } = require('apollo-link-http');
   return new HttpLink({
-    uri: 'http://localhost:3000/api',
-    credentials: 'include',
+    uri: `${process.env.NEXT_PUBLIC_HOST ?? 'http://localhost:3000'}/api`,
+    credentials: 'same-origin',
   });
 }
