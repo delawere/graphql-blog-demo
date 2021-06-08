@@ -28,7 +28,7 @@ jobs:
           --exclude .gitignore \
           --exclude .git \
           --exclude .next \
-          . root@34.118.70.136:~/homework/
+          . deploy@34.118.70.136:~/homework/
       - name: Run app
         run: |
-          ssh root@34.118.70.136 "cd ~/homework && export NEXT_PUBLIC_HOST=true && npm install --production && cd && pm2 restart ecosystem.config.js" 
+          ssh deploy@34.118.70.136 "cd ~/homework && export NEXT_PUBLIC_HOST=true && npm install --production && cd && pm2 restart ecosystem.config.js" 
