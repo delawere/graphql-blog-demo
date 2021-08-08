@@ -28,7 +28,8 @@ jobs:
           --exclude .gitignore \
           --exclude .git \
           --exclude .next \
+          --exclude .config \
           . deploy@34.142.115.186:~/graphql-blog-demo/
       - name: Run app
         run: |
-          ssh deploy@34.142.115.186 "cd ~/graphql-blog-demo && npm install --production && cd && NEXT_PUBLIC_HOST=true pm2 restart ecosystem.config.js --update-env"
+          ssh deploy@34.142.115.186 "cd ~/graphql-blog-demo && npm install --production && cd && NEXT_PUBLIC_HOST=true pm2 restart .config/ecosystem.config.js --update-env"
