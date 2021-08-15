@@ -32,4 +32,4 @@ jobs:
           . delawere2008@34.142.115.186:~/graphql-blog-demo/
       - name: Run app
         run: |
-          ssh delawere2008@34.142.115.186 "cd ~/graphql-blog-demo && npm install --production && NEXT_PUBLIC_HOST=true pm2 restart ecosystem.config.js --update-env"
+          ssh delawere2008@34.142.115.186 "cd ~/graphql-blog-demo && npm install --production && npm run build && NEXT_PUBLIC_HOST=true pm2 restart ecosystem.config.js --update-env"
